@@ -1,25 +1,22 @@
-import AboutSection from "@/components/about-section";
-import BottomNavSection from "@/components/bottom-nav-section";
-import ContactSection from "@/components/contact-section";
-import CoursePromoSection from "@/components/course-promo-section";
+import BenefitsDashboard from "@/components/benefits-dashboard";
 import CTASection from "@/components/cta-section";
-import FAQSection from "@/components/faq-section";
+import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
-import PartnersSection from "@/components/partners-section";
-import ServicesSection from "@/components/services-section";
+import InstantReturnFlow from "@/components/instant-return-flow";
+import PartnersTestimonials from "@/components/partners-testimonials";
+import ProblemSection from "@/components/problem-section";
+import RetailerSolution from "@/components/retailer-solution";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <CoursePromoSection />
-      <FAQSection />
-      <ServicesSection />
-      <ContactSection />
-      <PartnersSection />
-      <AboutSection />
+      <ProblemSection />
+      <InstantReturnFlow />
+      <BenefitsDashboard />
+      <RetailerSolution />
+      <PartnersTestimonials />
       <CTASection />
-      <BottomNavSection />
     </main>
   );
 }
