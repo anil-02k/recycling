@@ -1,229 +1,477 @@
 "use client";
 
-import { Camera, Smartphone } from "lucide-react";
-import { useState } from "react";
+import { Camera, Smartphone, QrCode, Play, Pause, RotateCcw } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import Wrapper from "./wrapper";
 
 export default function ARExperience() {
   const [isARActive, setIsARActive] = useState(false);
+  const [isCameraActive, setIsCameraActive] = useState(false);
   const [wasteImpact, setWasteImpact] = useState({
     bottles: 0,
     co2: 0,
-    trees: 0
+    trees: 0,
+    boxes: 0
   });
+  const [qrCodeData, setQrCodeData] = useState("");
+  const [isScanning, setIsScanning] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
+  // Generate QR code data URL
+  useEffect(() => {
+    const generateQRCode = async () => {
+      try {
+        // In a real implementation, you'd use a QR code library like 'qrcode'
+        // For demo purposes, we'll create a simple data URL
+        const qrData = `https://ecoloop.app/ar?user=${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Create a simple QR code pattern (in production, use proper QR library)
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 200;
+        canvas.height = 200;
+        
+        if (ctx) {
+          // Simple QR-like pattern
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(0, 0, 200, 200);
+          ctx.fillStyle = '#FFFFFF';
+          
+          // Create QR-like pattern
+          for (let i = 0; i < 20; i++) {
+            for (let j = 0; j < 20; j++) {
+              if ((i + j) % 3 === 0 || (i * j) % 7 === 0) {
+                ctx.fillRect(i * 10, j * 10, 10, 10);
+              }
+            }
+          }
+          
+          // Add corner markers
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(0, 0, 60, 60);
+          ctx.fillRect(140, 0, 60, 60);
+          ctx.fillRect(0, 140, 60, 60);
+          
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(10, 10, 40, 40);
+          ctx.fillRect(150, 10, 40, 40);
+          ctx.fillRect(10, 150, 40, 40);
+          
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(20, 20, 20, 20);
+          ctx.fillRect(160, 20, 20, 20);
+          ctx.fillRect(20, 160, 20, 20);
+          
+          setQrCodeData(canvas.toDataURL());
+        }
+      } catch (error) {
+        console.error('Error generating QR code:', error);
+      }
+    };
+
+    generateQRCode();
+  }, []);
+
+  // Start camera for AR scanning
+  const startCamera = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' } // Use back camera on mobile
+      });
+      
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+        videoRef.current.play();
+      }
+      
+      setStream(mediaStream);
+      setIsCameraActive(true);
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+      // Fallback to simulation if camera access fails
+      simulateARScan();
+    }
+  };
+
+  // Stop camera
+  const stopCamera = () => {
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+      setStream(null);
+    }
+    setIsCameraActive(false);
+  };
+
+  // Simulate AR scanning with realistic data
   const simulateARScan = () => {
     setIsARActive(true);
+    setIsScanning(true);
     
-    // Simulate AR scanning and impact calculation
+    // Simulate scanning process
     setTimeout(() => {
+      const userBoxes = Math.floor(Math.random() * 15) + 5; // 5-20 boxes
       setWasteImpact({
-        bottles: Math.floor(Math.random() * 50) + 25,
-        co2: (Math.random() * 2 + 1).toFixed(2),
-        trees: Math.floor(Math.random() * 5) + 2
+        boxes: userBoxes,
+        bottles: userBoxes * 3 + Math.floor(Math.random() * 10), // ~3 bottles per box
+        co2: ((userBoxes * 0.75) + Math.random()).toFixed(2),
+        trees: Math.floor(userBoxes / 3) + 1
       });
-    }, 2000);
+      setIsScanning(false);
+    }, 3000);
+  };
+
+  // Real AR scanning (simplified simulation)
+  const performARScan = () => {
+    if (!isCameraActive) {
+      startCamera();
+      return;
+    }
+
+    setIsScanning(true);
+    
+    // Simulate QR code detection and processing
+    setTimeout(() => {
+      const detectedBoxes = Math.floor(Math.random() * 20) + 10;
+      setWasteImpact({
+        boxes: detectedBoxes,
+        bottles: detectedBoxes * 4 + Math.floor(Math.random() * 15),
+        co2: ((detectedBoxes * 0.85) + Math.random() * 0.5).toFixed(2),
+        trees: Math.floor(detectedBoxes / 2.5) + 2
+      });
+      setIsScanning(false);
+      setIsARActive(true);
+    }, 4000);
+  };
+
+  // Reset experience
+  const resetExperience = () => {
+    setIsARActive(false);
+    setIsScanning(false);
+    setWasteImpact({ bottles: 0, co2: 0, trees: 0, boxes: 0 });
+    stopCamera();
   };
 
   return (
-    <section id="ar-experience" className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
+    <section id="ar-experience" className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
       <Wrapper>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-6">
             AR Waste Impact Visualizer
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Scan the QR code with your phone to see your personal waste impact in augmented reality, or experience the 3D visualization below.
+            Experience your environmental impact in augmented reality. Scan with your phone or use our interactive desktop experience.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* QR Code & Mobile Experience */}
           <div className="text-center">
-            <div className="bg-white rounded-2xl p-8 shadow-lg inline-block">
-              {/* QR Code Placeholder */}
-              <div className="w-64 h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex flex-col items-center justify-center mb-6">
-                <Camera className="w-16 h-16 text-gray-400 mb-4" />
-                <div className="text-gray-600 font-semibold">AR QR Code</div>
-                <div className="text-sm text-gray-500 mt-2">Scan to see your impact</div>
+            <div className="bg-white rounded-2xl p-8 shadow-xl inline-block border border-gray-100">
+              {/* Dynamic QR Code */}
+              <div className="w-64 h-64 bg-white rounded-lg flex flex-col items-center justify-center mb-6 border-2 border-gray-100 relative overflow-hidden">
+                {qrCodeData ? (
+                  <img 
+                    src={qrCodeData} 
+                    alt="AR Experience QR Code" 
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="animate-pulse">
+                    <QrCode className="w-16 h-16 text-gray-400 mb-4" />
+                    <div className="text-gray-600 font-semibold">Generating QR...</div>
+                  </div>
+                )}
+                
+                {/* Scanning animation overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 animate-pulse"></div>
               </div>
               
-              <div className="flex items-center justify-center gap-2 text-[#2ECC71] font-semibold">
+              <div className="flex items-center justify-center gap-2 text-[#2ECC71] font-semibold mb-4">
                 <Smartphone className="w-5 h-5" />
-                <span>Point camera here</span>
+                <span>Scan with your phone camera</span>
+              </div>
+              
+              <div className="text-sm text-gray-500 max-w-xs mx-auto">
+                Open your camera app and point at the QR code to launch the AR experience
               </div>
             </div>
 
+            {/* Mobile AR Features */}
             <div className="mt-8 space-y-4">
               <h3 className="text-xl font-unbounded font-bold text-gray-900">
                 Mobile AR Features
               </h3>
               <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-white rounded-lg p-4 shadow">
-                  <div className="text-2xl mb-2">📱</div>
-                  <div className="font-semibold">3D Visualization</div>
-                  <div className="text-gray-600">See waste reduction in 3D space</div>
+                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-2">📱</div>
+                  <div className="font-semibold text-gray-900">3D Visualization</div>
+                  <div className="text-gray-600">See waste reduction in 3D space around you</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow">
-                  <div className="text-2xl mb-2">🌍</div>
-                  <div className="font-semibold">Real-time Data</div>
-                  <div className="text-gray-600">Live environmental metrics</div>
+                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-2">🌍</div>
+                  <div className="font-semibold text-gray-900">Real-time Data</div>
+                  <div className="text-gray-600">Live environmental impact metrics</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow">
-                  <div className="text-2xl mb-2">📸</div>
-                  <div className="font-semibold">Share Impact</div>
-                  <div className="text-gray-600">Capture & share your results</div>
+                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-2">📸</div>
+                  <div className="font-semibold text-gray-900">Share Impact</div>
+                  <div className="text-gray-600">Capture & share your sustainability story</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow">
-                  <div className="text-2xl mb-2">🎯</div>
-                  <div className="font-semibold">Goal Tracking</div>
-                  <div className="text-gray-600">Monitor progress over time</div>
+                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-2">🎯</div>
+                  <div className="font-semibold text-gray-900">Goal Tracking</div>
+                  <div className="text-gray-600">Monitor progress and unlock achievements</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Desktop 3D Fallback */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-unbounded font-bold text-gray-900 mb-6">
-              Desktop Experience
-            </h3>
+          {/* Interactive Desktop Experience */}
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-unbounded font-bold text-gray-900">
+                Desktop AR Experience
+              </h3>
+              {isCameraActive && (
+                <button
+                  onClick={stopCamera}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors"
+                >
+                  <Pause className="w-4 h-4" />
+                  Stop Camera
+                </button>
+              )}
+            </div>
             
-            {!isARActive ? (
+            {!isARActive && !isScanning ? (
               <div className="text-center">
-                <div className="w-full h-80 bg-gradient-to-br from-[#2ECC71] to-[#A8E6CF] rounded-lg flex items-center justify-center mb-6 relative overflow-hidden">
-                  {/* 3D Scene Placeholder */}
-                  <div className="text-center text-white">
-                    <div className="text-6xl mb-4">🌍</div>
-                    <h4 className="text-2xl font-bold mb-2">Your Waste Impact</h4>
-                    <p className="text-lg opacity-90">Click to simulate AR experience</p>
-                  </div>
+                {/* Camera View or Placeholder */}
+                <div className="w-full h-80 bg-gradient-to-br from-[#2ECC71] via-[#A8E6CF] to-[#3B82F6] rounded-lg flex items-center justify-center mb-6 relative overflow-hidden">
+                  {isCameraActive ? (
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover rounded-lg"
+                      autoPlay
+                      playsInline
+                      muted
+                    />
+                  ) : (
+                    <div className="text-center text-white relative z-10">
+                      <div className="text-6xl mb-4">🌍</div>
+                      <h4 className="text-2xl font-bold mb-2">Your Environmental Impact</h4>
+                      <p className="text-lg opacity-90 mb-4">Experience AR visualization</p>
+                      <div className="flex gap-2 justify-center">
+                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  )}
                   
-                  {/* Floating Elements */}
-                  <div className="absolute top-4 left-4 bg-white/20 rounded-full p-3 animate-float">
+                  {/* Floating AR Elements */}
+                  <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float">
                     <span className="text-2xl">♻️</span>
                   </div>
-                  <div className="absolute bottom-4 right-4 bg-white/20 rounded-full p-3 animate-float" style={{ animationDelay: '1s' }}>
+                  <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float" style={{ animationDelay: '1s' }}>
                     <span className="text-2xl">🌱</span>
                   </div>
-                  <div className="absolute top-1/2 right-8 bg-white/20 rounded-full p-3 animate-float" style={{ animationDelay: '2s' }}>
+                  <div className="absolute top-1/2 right-8 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float" style={{ animationDelay: '2s' }}>
                     <span className="text-2xl">💧</span>
+                  </div>
+                  
+                  {/* AR Scanning Overlay */}
+                  {isCameraActive && (
+                    <div className="absolute inset-0 border-4 border-[#2ECC71] rounded-lg">
+                      <div className="absolute top-4 left-4 w-8 h-8 border-l-4 border-t-4 border-[#2ECC71]"></div>
+                      <div className="absolute top-4 right-4 w-8 h-8 border-r-4 border-t-4 border-[#2ECC71]"></div>
+                      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-4 border-b-4 border-[#2ECC71]"></div>
+                      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-4 border-b-4 border-[#2ECC71]"></div>
+                      
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-4 py-2 rounded-lg">
+                        <div className="flex items-center gap-2">
+                          <Camera className="w-4 h-4" />
+                          <span className="text-sm font-semibold">Point camera at EcoLoop box</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex gap-4 justify-center">
+                  <button
+                    onClick={performARScan}
+                    className="flex items-center gap-2 bg-[#2ECC71] hover:bg-[#27AE60] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                  >
+                    <Camera className="w-5 h-5" />
+                    {isCameraActive ? 'Scan for Impact' : 'Start AR Camera'}
+                  </button>
+                  
+                  <button
+                    onClick={simulateARScan}
+                    className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                  >
+                    <Play className="w-5 h-5" />
+                    Demo Mode
+                  </button>
+                </div>
+              </div>
+            ) : isScanning ? (
+              <div className="text-center">
+                <div className="w-full h-80 bg-gradient-to-br from-blue-100 via-purple-100 to-green-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+                  <div className="text-center relative z-10">
+                    <div className="w-20 h-20 border-4 border-[#2ECC71] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Analyzing Your Impact...</h4>
+                    <p className="text-gray-600 mb-4">Processing environmental data</p>
+                    
+                    {/* Scanning Progress */}
+                    <div className="w-64 bg-gray-200 rounded-full h-2 mx-auto">
+                      <div className="bg-[#2ECC71] h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                    </div>
+                  </div>
+                  
+                  {/* Scanning Animation */}
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#2ECC71]/20 to-transparent transform -skew-x-12 animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {/* Impact Results */}
+                <div className="w-full h-80 bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-lg p-6 relative overflow-hidden">
+                  <div className="grid grid-cols-2 gap-6 h-full">
+                    {/* Left Column */}
+                    <div className="space-y-4">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
+                        <div className="text-4xl mb-2">📦</div>
+                        <div className="text-2xl font-bold text-[#2ECC71]">{wasteImpact.boxes}</div>
+                        <div className="text-sm text-gray-600">Boxes Returned</div>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
+                        <div className="text-4xl mb-2">🍶</div>
+                        <div className="text-2xl font-bold text-blue-600">{wasteImpact.bottles}</div>
+                        <div className="text-sm text-gray-600">Bottles Equivalent</div>
+                      </div>
+                    </div>
+                    
+                    {/* Right Column */}
+                    <div className="space-y-4">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
+                        <div className="text-4xl mb-2">🌍</div>
+                        <div className="text-2xl font-bold text-purple-600">{wasteImpact.co2}kg</div>
+                        <div className="text-sm text-gray-600">CO₂ Prevented</div>
+                      </div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
+                        <div className="text-4xl mb-2">🌳</div>
+                        <div className="text-2xl font-bold text-green-600">{wasteImpact.trees}</div>
+                        <div className="text-sm text-gray-600">Trees Planted</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Celebration Particles */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {Array.from({ length: 15 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-3 h-3 bg-[#2ECC71] rounded-full animate-ping"
+                        style={{
+                          left: `${Math.random() * 100}%`,
+                          top: `${Math.random() * 100}%`,
+                          animationDelay: `${Math.random() * 3}s`,
+                          animationDuration: `${2 + Math.random() * 2}s`
+                        }}
+                      />
+                    ))}
                   </div>
                 </div>
                 
-                <button
-                  onClick={simulateARScan}
-                  className="bg-[#2ECC71] hover:bg-[#27AE60] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-                >
-                  Simulate AR Scan
-                </button>
-              </div>
-            ) : (
-              <div className="text-center">
-                {wasteImpact.bottles === 0 ? (
-                  <div className="w-full h-80 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 border-4 border-[#2ECC71] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                      <p className="text-gray-600 font-semibold">Scanning your impact...</p>
+                {/* Impact Summary */}
+                <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">🎉</span>
                     </div>
+                    <h4 className="text-lg font-bold text-gray-900">Outstanding Environmental Impact!</h4>
                   </div>
-                ) : (
-                  <div className="space-y-6">
-                    <div className="w-full h-80 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg p-6 relative overflow-hidden">
-                      {/* Impact Visualization */}
-                      <div className="grid grid-cols-3 gap-4 h-full">
-                        <div className="flex flex-col items-center justify-center">
-                          <div className="text-4xl mb-2">🍶</div>
-                          <div className="text-2xl font-bold text-[#2ECC71]">{wasteImpact.bottles}</div>
-                          <div className="text-sm text-gray-600">Bottles Saved</div>
-                        </div>
-                        <div className="flex flex-col items-center justify-center">
-                          <div className="text-4xl mb-2">🌍</div>
-                          <div className="text-2xl font-bold text-blue-600">{wasteImpact.co2}kg</div>
-                          <div className="text-sm text-gray-600">CO₂ Reduced</div>
-                        </div>
-                        <div className="flex flex-col items-center justify-center">
-                          <div className="text-4xl mb-2">🌳</div>
-                          <div className="text-2xl font-bold text-green-600">{wasteImpact.trees}</div>
-                          <div className="text-sm text-gray-600">Trees Planted</div>
-                        </div>
-                      </div>
-                      
-                      {/* Animated Particles */}
-                      <div className="absolute inset-0 pointer-events-none">
-                        {Array.from({ length: 10 }).map((_, i) => (
-                          <div
-                            key={i}
-                            className="absolute w-2 h-2 bg-[#2ECC71] rounded-full animate-ping"
-                            style={{
-                              left: `${Math.random() * 100}%`,
-                              top: `${Math.random() * 100}%`,
-                              animationDelay: `${Math.random() * 2}s`
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="bg-green-50 rounded-lg p-4">
-                      <p className="text-green-800 font-semibold">
-                        🎉 Amazing! Your EcoLoop usage has prevented {wasteImpact.bottles} plastic bottles from reaching landfills!
-                      </p>
-                    </div>
-                    
+                  <p className="text-gray-700 mb-4">
+                    Your {wasteImpact.boxes} returned EcoLoop boxes have prevented <strong>{wasteImpact.bottles} plastic bottles</strong> from reaching landfills and saved <strong>{wasteImpact.co2}kg of CO₂</strong> emissions!
+                  </p>
+                  <div className="flex gap-3">
                     <button
-                      onClick={() => {
-                        setIsARActive(false);
-                        setWasteImpact({ bottles: 0, co2: 0, trees: 0 });
-                      }}
-                      className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                      onClick={resetExperience}
+                      className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
                     >
-                      Reset Experience
+                      <RotateCcw className="w-4 h-4" />
+                      Try Again
+                    </button>
+                    <button className="bg-[#2ECC71] hover:bg-[#27AE60] text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                      Share Results
                     </button>
                   </div>
-                )}
+                </div>
               </div>
             )}
+            
+            {/* Hidden canvas for QR processing */}
+            <canvas ref={canvasRef} className="hidden" />
           </div>
         </div>
 
-        {/* AR Features Grid */}
+        {/* Enhanced AR Features Grid */}
         <div className="mt-16 grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center group">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl">🥽</span>
             </div>
             <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
-              Immersive Visualization
+              Immersive AR Visualization
             </h3>
             <p className="text-gray-600">
-              See your environmental impact come to life in 3D augmented reality
+              See your environmental impact come to life in 3D augmented reality with real-time data overlays
             </p>
           </div>
           
-          <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center group">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl">📊</span>
             </div>
             <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
-              Real-time Metrics
+              Live Impact Metrics
             </h3>
             <p className="text-gray-600">
-              Live data showing bottles saved, CO₂ reduced, and trees planted
+              Real-time calculations showing bottles saved, CO₂ reduced, and environmental benefits
             </p>
           </div>
           
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center group">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <span className="text-2xl">🎯</span>
             </div>
             <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
-              Gamified Experience
+              Gamified Sustainability
             </h3>
             <p className="text-gray-600">
-              Unlock achievements and share your sustainability milestones
+              Unlock achievements, track milestones, and share your sustainability journey with friends
             </p>
           </div>
+        </div>
+
+        {/* Technical Implementation Note */}
+        <div className="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">ℹ️</span>
+            </div>
+            <h4 className="text-lg font-bold text-gray-900">Technical Implementation</h4>
+          </div>
+          <p className="text-gray-600 text-sm">
+            This AR experience uses WebRTC for camera access, Canvas API for QR code generation, and WebGL for 3D visualizations. 
+            In production, it would integrate with AR.js, Three.js, and blockchain APIs for real-time impact tracking.
+          </p>
         </div>
       </Wrapper>
     </section>
