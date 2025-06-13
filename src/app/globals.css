@@ -147,6 +147,50 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Marquee animation for carbon ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse animation for blockchain nodes */
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
 /* Breakpoint utilities */
 @media (min-width: 424px) {
   .xs\:text-2xl {
@@ -160,5 +204,57 @@
   .xs\:mx-0 {
     margin-left: 0;
     margin-right: 0;
+  }
+}
+
+/* Judge mode styles */
+.judge-mode-panel {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* AR Experience styles */
+.ar-scanner {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  animation: scan 2s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Blockchain visualization */
+.blockchain-node {
+  transition: all 0.3s ease;
+}
+
+.blockchain-node:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+/* Carbon ticker enhancements */
+.ticker-item {
+  white-space: nowrap;
+  padding: 0 2rem;
+}
+
+/* Mobile responsiveness for new sections */
+@media (max-width: 768px) {
+  .blockchain-visualization {
+    height: 200px;
+  }
+  
+  .ar-experience-container {
+    padding: 1rem;
+  }
+  
+  .carbon-ticker {
+    font-size: 0.875rem;
   }
 }
