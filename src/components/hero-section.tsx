@@ -30,7 +30,7 @@ export default function HeroSection() {
               <Button 
                 asChild
                 size="lg"
-                className="bg-white text-[#0F2E1B] hover:bg-gray-100 font-semibold text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto"
+                className="bg-white text-[#0F2E1B] hover:bg-gray-100 font-semibold text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto border-0"
               >
                 <Link href="#cta">Join Early Access →</Link>
               </Button>
@@ -39,7 +39,7 @@ export default function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10 font-semibold text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto"
+                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#0F2E1B] font-semibold text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto transition-all duration-300"
               >
                 <Link href="#how-it-works">See How It Works ↓</Link>
               </Button>
