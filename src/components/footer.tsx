@@ -95,7 +95,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 EcoLoop Hackathon Edition. Built for Sparkathon 2025. All rights reserved.
+            © 2025 EcoLoop Hackathon Edition. Built for Hackathon 2025. All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Privacy Policy</Link>
@@ -108,7 +108,7 @@ export default function Footer() {
         <div className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 px-4 py-2 rounded-full text-sm">
             <span className="text-lg">🏆</span>
-            <span className="font-semibold">Sparkathon 2025 Submission</span>
+            <span className="font-semibold">Hackathon 2025 Submission</span>
           </div>
         </div>
       </Wrapper>

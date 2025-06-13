@@ -55,7 +55,7 @@ export default function CarbonTicker() {
         <div className="flex items-center gap-2 mx-8">
           <span className="text-lg">🏆</span>
           <span className="font-semibold">
-            Sparkathon 2025 Entry
+            Hackathon 2025 Entry
           </span>
         </div>
 

@@ -15,8 +15,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "EcoLoop - Return Packaging at Your Doorstep | Sparkathon 2025",
-  description: "Transform packaging waste into rewards. Hand empties to delivery drivers for instant discounts. No trips. No waste. Built for Sparkathon 2025.",
+  title: "EcoLoop - Return Packaging at Your Doorstep | Hackathon 2025",
+  description: "Transform packaging waste into rewards. Hand empties to delivery drivers for instant discounts. No trips. No waste. Built for Hackathon 2025.",
   keywords: "sustainability, packaging, recycling, blockchain, AR, environmental impact, circular economy",
   authors: [{ name: "EcoLoop Team" }],
   openGraph: {

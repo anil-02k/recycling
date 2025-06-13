@@ -13,7 +13,7 @@ export default function Header() {
   // Easter egg handler
   const handleKeyPress = (e: React.KeyboardEvent) => {
     const target = e.target as HTMLInputElement;
-    if (target.value === "SPARK2025") {
+    if (target.value === "HACK2025") {
       setShowJudgeMode(true);
       target.value = "";
     }
