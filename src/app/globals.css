@@ -134,10 +134,10 @@
 
 @layer base {
   * {
-    @apply border-gray-200 outline-offset-2 outline-2 outline-transparent;
+    @apply border-gray-200;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-gray-900;
   }
 }
 
@@ -149,16 +149,16 @@
 
 /* EcoLoop specific styles */
 .eco-gradient {
-  background: linear-gradient(135deg, #0F2E1B 0%, #2ECC71 100%);
+  background: linear-gradient(135deg, #2ECC71 0%, #27AE60 50%, #1E8449 100%);
 }
 
 .eco-card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .eco-card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(46, 204, 113, 0.15);
 }
 
 .counter-animation {
@@ -179,21 +179,21 @@
 /* Slider styling */
 .slider::-webkit-slider-thumb {
   appearance: none;
-  width: 24px;
   height: 24px;
+  width: 24px;
   border-radius: 50%;
   background: #2ECC71;
   cursor: pointer;
-  border: 3px solid #ffffff;
+  border: 3px solid white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .slider::-moz-range-thumb {
-  width: 24px;
   height: 24px;
+  width: 24px;
   border-radius: 50%;
   background: #2ECC71;
   cursor: pointer;
-  border: 3px solid #ffffff;
+  border: 3px solid white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
