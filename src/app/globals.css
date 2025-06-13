@@ -134,7 +134,7 @@
 
 @layer base {
   * {
-    @apply border-[var(--border)] outline-ring/50;
+    @apply border-gray-200 outline-offset-2 outline-2 outline-transparent;
   }
   body {
     @apply bg-background text-foreground;
@@ -145,4 +145,55 @@
 .wrapper {
   width: min(100% - 4rem, 1110px);
   margin-inline: auto;
+}
+
+/* EcoLoop specific styles */
+.eco-gradient {
+  background: linear-gradient(135deg, #0F2E1B 0%, #2ECC71 100%);
+}
+
+.eco-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eco-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.counter-animation {
+  animation: countUp 0.8s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slider styling */
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2ECC71;
+  cursor: pointer;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2ECC71;
+  cursor: pointer;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
