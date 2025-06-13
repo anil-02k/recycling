@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import Wrapper from "./wrapper";
 
 export default function Footer() {
@@ -18,16 +19,9 @@ export default function Footer() {
                 <div className="text-xs text-orange-500 font-semibold">Hackathon Edition</div>
               </div>
             </div>
-            <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
+            <p className="text-sm sm:text-base text-gray-300">
               Transforming packaging waste into rewards. Building a sustainable future, one delivery at a time.
             </p>
-            
-            {/* QR Code */}
-            <div className="bg-white p-3 sm:p-4 rounded-lg w-fit">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded flex items-center justify-center">
-                <span className="text-xs text-gray-500 text-center">Demo Video QR</span>
-              </div>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -75,17 +69,37 @@ export default function Footer() {
             <div className="mt-4 sm:mt-6">
               <h4 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Follow Us</h4>
               <div className="flex gap-2 sm:gap-3">
-                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-base sm:text-lg">📘</span>
+                <Link 
+                  href="https://facebook.com/ecoloop" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#1877F2] transition-all duration-300 group"
+                >
+                  <FaFacebookF className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:scale-110 transition-transform" />
                 </Link>
-                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-base sm:text-lg">📷</span>
+                <Link 
+                  href="https://twitter.com/ecoloop" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#1DA1F2] transition-all duration-300 group"
+                >
+                  <FaTwitter className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:scale-110 transition-transform" />
                 </Link>
-                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-base sm:text-lg">🐦</span>
+                <Link 
+                  href="https://instagram.com/ecoloop" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-[#E4405F] hover:to-[#F56040] transition-all duration-300 group"
+                >
+                  <FaInstagram className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:scale-110 transition-transform" />
                 </Link>
-                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-base sm:text-lg">💼</span>
+                <Link 
+                  href="https://linkedin.com/company/ecoloop" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#0A66C2] transition-all duration-300 group"
+                >
+                  <FaLinkedinIn className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:scale-110 transition-transform" />
                 </Link>
               </div>
             </div>
