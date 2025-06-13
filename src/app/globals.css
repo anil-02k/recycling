@@ -92,8 +92,20 @@
 
 /* Custom wrapper */
 .wrapper {
-  width: min(100% - 4rem, 1110px);
+  width: min(100% - 2rem, 1110px);
   margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .wrapper {
+    width: min(100% - 3rem, 1110px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    width: min(100% - 4rem, 1110px);
+  }
 }
 
 /* EcoLoop specific styles */
@@ -128,8 +140,8 @@
 /* Slider styling */
 .slider::-webkit-slider-thumb {
   appearance: none;
-  height: 24px;
-  width: 24px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   background: #2ECC71;
   cursor: pointer;
@@ -137,14 +149,28 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+@media (min-width: 768px) {
+  .slider::-webkit-slider-thumb {
+    height: 24px;
+    width: 24px;
+  }
+}
+
 .slider::-moz-range-thumb {
-  height: 24px;
-  width: 24px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   background: #2ECC71;
   cursor: pointer;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .slider::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+  }
 }
 
 /* Marquee animation for carbon ticker */
@@ -191,8 +217,16 @@
   animation: pulse-green 2s ease-in-out infinite;
 }
 
-/* Breakpoint utilities */
-@media (min-width: 424px) {
+/* Enhanced responsive breakpoints */
+@media (min-width: 375px) {
+  .xs\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .xs\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
   .xs\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -204,6 +238,23 @@
   .xs\:mx-0 {
     margin-left: 0;
     margin-right: 0;
+  }
+  .xs\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .xs\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 424px) {
+  .xxs\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .xxs\:gap-4 {
+    gap: 1rem;
   }
 }
 
@@ -241,11 +292,17 @@
 /* Carbon ticker enhancements */
 .ticker-item {
   white-space: nowrap;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
-/* Mobile responsiveness for new sections */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .ticker-item {
+    padding: 0 2rem;
+  }
+}
+
+/* Mobile-first responsive design improvements */
+@media (max-width: 640px) {
   .blockchain-visualization {
     height: 200px;
   }
@@ -256,5 +313,100 @@
   
   .carbon-ticker {
     font-size: 0.875rem;
+  }
+  
+  /* Mobile spacing adjustments */
+  .mobile-spacing {
+    padding: 1rem;
+  }
+  
+  /* Mobile text sizing */
+  .mobile-text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .mobile-text-base {
+    font-size: 1rem;
+  }
+  
+  /* Mobile grid adjustments */
+  .mobile-grid-1 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  /* Tablet specific styles */
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tablet-spacing {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Small desktop styles */
+  .desktop-sm-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Container query support for modern browsers */
+@container (max-width: 640px) {
+  .container-mobile {
+    padding: 1rem;
+  }
+}
+
+/* Improved focus states for accessibility */
+.focus-visible\:ring-eco {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-visible\:ring-eco:focus-visible {
+  box-shadow: 0 0 0 2px #2ECC71;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-friendly {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .eco-gradient {
+    background: linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float,
+  .animate-pulse-green,
+  .counter-animation {
+    animation: none;
+  }
+  
+  .eco-card-hover {
+    transition: none;
+  }
+}
+
+/* Dark mode improvements */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
   }
 }

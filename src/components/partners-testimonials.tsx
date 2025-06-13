@@ -72,67 +72,67 @@ export default function PartnersTestimonials() {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white">
       <Wrapper>
         {/* Partners Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-4 sm:mb-6">
             Trusted by Industry Leaders
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto mb-8 sm:mb-12 px-4 sm:px-0">
             Join hundreds of forward-thinking companies already using EcoLoop to reduce costs and environmental impact.
           </p>
           
           {/* Partner Logos */}
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-12">
             {partners.map((partner, index) => (
               <div 
                 key={index}
-                className="flex flex-col items-center p-4 hover:scale-110 transition-transform duration-300"
+                className="flex flex-col items-center p-3 sm:p-4 hover:scale-110 transition-transform duration-300"
               >
-                <div className="text-4xl mb-2">{partner.logo}</div>
-                <span className="text-sm font-semibold text-gray-600">{partner.name}</span>
+                <div className="text-2xl sm:text-3xl lg:text-4xl mb-1 sm:mb-2">{partner.logo}</div>
+                <span className="text-xs sm:text-sm font-semibold text-gray-600">{partner.name}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Testimonials Section */}
-        <div className="bg-gray-50 rounded-3xl p-8 md:p-12">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-unbounded font-bold text-gray-900 mb-4">
+        <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12">
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-unbounded font-bold text-gray-900 mb-3 sm:mb-4">
               What Our Users Say
             </h3>
-            <p className="text-gray-600">Real stories from real users making a real impact</p>
+            <p className="text-sm sm:text-base text-gray-600">Real stories from real users making a real impact</p>
           </div>
 
           {/* Testimonial Carousel */}
           <div className="relative max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 shadow-lg">
               {/* Stars */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4 sm:mb-6">
                 {Array.from({ length: testimonials[currentTestimonial].rating }).map((_, i) => (
-                  <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-yellow-400 fill-current" />
                 ))}
               </div>
 
               {/* Quote */}
-              <blockquote className="text-xl md:text-2xl text-gray-700 text-center leading-relaxed mb-8 italic">
+              <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 text-center leading-relaxed mb-6 sm:mb-8 italic">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
 
               {/* Author */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <div className="text-4xl">{testimonials[currentTestimonial].avatar}</div>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-4">
+                <div className="text-2xl sm:text-3xl lg:text-4xl">{testimonials[currentTestimonial].avatar}</div>
                 <div className="text-center md:text-left">
-                  <div className="font-semibold text-gray-900 text-lg">
+                  <div className="font-semibold text-gray-900 text-base sm:text-lg">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-gray-600">
+                  <div className="text-sm sm:text-base text-gray-600">
                     {testimonials[currentTestimonial].title}
                   </div>
                 </div>
-                <div className="bg-[#2ECC71] text-white px-4 py-2 rounded-full text-sm font-semibold">
+                <div className="bg-[#2ECC71] text-white px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                   {testimonials[currentTestimonial].metric}
                 </div>
               </div>
@@ -141,26 +141,26 @@ export default function PartnersTestimonials() {
             {/* Navigation Arrows */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors"
+              className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 sm:p-3 shadow-lg hover:bg-gray-50 transition-colors"
             >
-              <ChevronLeft className="w-6 h-6 text-gray-600" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-gray-600" />
             </button>
             
             <button
               onClick={nextTestimonial}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors"
+              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 sm:p-3 shadow-lg hover:bg-gray-50 transition-colors"
             >
-              <ChevronRight className="w-6 h-6 text-gray-600" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-gray-600" />
             </button>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 gap-2">
+          <div className="flex justify-center mt-6 sm:mt-8 gap-1 sm:gap-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   currentTestimonial === index ? 'bg-[#2ECC71] scale-125' : 'bg-gray-300'
                 }`}
               />
@@ -169,22 +169,22 @@ export default function PartnersTestimonials() {
         </div>
 
         {/* Social Proof Numbers */}
-        <div className="grid md:grid-cols-4 gap-8 mt-16 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mt-12 sm:mt-16 text-center">
           <div>
-            <div className="text-3xl font-unbounded font-bold text-[#2ECC71]">500+</div>
-            <div className="text-gray-600">Early Adopters</div>
+            <div className="text-xl sm:text-2xl lg:text-3xl font-unbounded font-bold text-[#2ECC71]">500+</div>
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600">Early Adopters</div>
           </div>
           <div>
-            <div className="text-3xl font-unbounded font-bold text-[#2ECC71]">50k+</div>
-            <div className="text-gray-600">Boxes Returned</div>
+            <div className="text-xl sm:text-2xl lg:text-3xl font-unbounded font-bold text-[#2ECC71]">50k+</div>
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600">Boxes Returned</div>
           </div>
           <div>
-            <div className="text-3xl font-unbounded font-bold text-[#2ECC71]">₹2.5M</div>
-            <div className="text-gray-600">Rewards Distributed</div>
+            <div className="text-xl sm:text-2xl lg:text-3xl font-unbounded font-bold text-[#2ECC71]">₹2.5M</div>
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600">Rewards Distributed</div>
           </div>
           <div>
-            <div className="text-3xl font-unbounded font-bold text-[#2ECC71]">15 tons</div>
-            <div className="text-gray-600">CO₂ Prevented</div>
+            <div className="text-xl sm:text-2xl lg:text-3xl font-unbounded font-bold text-[#2ECC71]">15 tons</div>
+            <div className="text-xs sm:text-sm lg:text-base text-gray-600">CO₂ Prevented</div>
           </div>
         </div>
       </Wrapper>

@@ -118,39 +118,39 @@ export default function BlockchainTransparency() {
   };
 
   return (
-    <section id="blockchain" className="py-20 bg-gray-50">
+    <section id="blockchain" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
       <Wrapper>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-4 sm:mb-6">
             Blockchain Transparency Network
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
             Every box is tracked on our decentralized blockchain network. Real-time verification with complete transparency and immutable records.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-7 gap-8">
+        <div className="grid lg:grid-cols-7 gap-6 lg:gap-8">
           {/* Enhanced Blockchain Visualization - 70% */}
-          <div className="lg:col-span-5">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-unbounded font-bold text-gray-900">
+          <div className="lg:col-span-5 order-2 lg:order-1">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-unbounded font-bold text-gray-900">
                   Live Network Topology
                 </h3>
-                <div className="flex gap-4 text-sm">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-[#2ECC71] rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#2ECC71] rounded-full animate-pulse"></div>
                     <span className="text-gray-600">Active: {networkStats.nodes} nodes</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-yellow-500" />
+                    <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" />
                     <span className="text-gray-600">{networkStats.tps} TPS</span>
                   </div>
                 </div>
               </div>
               
               {/* Advanced Network Visualization */}
-              <div className="relative h-96 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 rounded-lg overflow-hidden">
+              <div className="relative h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 rounded-lg overflow-hidden">
                 {/* Background Grid */}
                 <div className="absolute inset-0 opacity-20">
                   <svg className="w-full h-full">
@@ -200,7 +200,7 @@ export default function BlockchainTransparency() {
                         {/* Data Flow Animation */}
                         {isActive && (
                           <circle
-                            r="4"
+                            r="3"
                             fill="#F59E0B"
                             className="animate-pulse"
                           >
@@ -225,7 +225,7 @@ export default function BlockchainTransparency() {
                   >
                     {/* Node Circle */}
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg transition-all duration-300 group-hover:scale-110 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base lg:text-lg shadow-lg transition-all duration-300 group-hover:scale-110 ${
                         node.status === "processing" ? "animate-pulse" : ""
                       }`}
                       style={{ backgroundColor: getNodeColor(node.type, node.status) }}
@@ -234,20 +234,20 @@ export default function BlockchainTransparency() {
                     </div>
                     
                     {/* Node Label */}
-                    <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    <div className="absolute top-10 sm:top-12 lg:top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       {node.label}
                     </div>
                     
                     {/* Status Indicator */}
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-ping"></div>
+                    <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full border-2 border-white animate-ping"></div>
                   </div>
                 ))}
 
                 {/* Network Stats Overlay */}
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-3">
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-2 sm:p-3">
                   <div className="text-xs space-y-1">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
                       <span>Network Status: Online</span>
                     </div>
                     <div>Blocks: {networkStats.blocks.toLocaleString()}</div>
@@ -256,60 +256,60 @@ export default function BlockchainTransparency() {
                 </div>
 
                 {/* Transaction Flow Indicator */}
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-3">
+                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-2 sm:p-3">
                   <div className="text-xs text-center">
-                    <div className="text-lg font-bold text-green-400">{networkStats.tps}</div>
+                    <div className="text-base sm:text-lg font-bold text-green-400">{networkStats.tps}</div>
                     <div>Transactions/sec</div>
                   </div>
                 </div>
               </div>
 
               {/* Network Legend */}
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="mt-4 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#2ECC71] rounded-full"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#2ECC71] rounded-full"></div>
                   <span className="text-gray-600">Validators</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#3B82F6] rounded-full"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#3B82F6] rounded-full"></div>
                   <span className="text-gray-600">Storage Nodes</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#8B5CF6] rounded-full"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#8B5CF6] rounded-full"></div>
                   <span className="text-gray-600">API Gateways</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#EF4444] rounded-full"></div>
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#EF4444] rounded-full"></div>
                   <span className="text-gray-600">Consensus</span>
                 </div>
               </div>
 
               {/* Recent Transactions */}
-              <div className="mt-6 bg-gray-50 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Database className="w-4 h-4" />
+              <div className="mt-4 sm:mt-6 bg-gray-50 rounded-lg p-3 sm:p-4">
+                <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                  <Database className="w-3 h-3 sm:w-4 sm:h-4" />
                   Latest Blockchain Transactions
                 </h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="flex justify-between items-center text-xs sm:text-sm bg-white rounded p-2">
                     <span className="text-gray-600">Box #7K92 → Return Confirmed</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <span className="text-[#2ECC71] font-mono text-xs">0x1a2b...7890</span>
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                  <div className="flex justify-between items-center text-xs sm:text-sm bg-white rounded p-2">
                     <span className="text-gray-600">Box #9M34 → Location Update</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <span className="text-blue-500 font-mono text-xs">0x9876...cdef</span>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-400 rounded-full animate-pulse"></div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                  <div className="flex justify-between items-center text-xs sm:text-sm bg-white rounded p-2">
                     <span className="text-gray-600">Box #5P78 → Reuse Cycle #4</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <span className="text-purple-500 font-mono text-xs">0xabcd...4321</span>
-                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-400 rounded-full animate-pulse"></div>
                     </div>
                   </div>
                 </div>
@@ -318,34 +318,34 @@ export default function BlockchainTransparency() {
           </div>
 
           {/* Enhanced Search Database - 30% */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Search className="w-5 h-5" />
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+              <h3 className="text-lg sm:text-xl font-unbounded font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                 Track Any Box
               </h3>
               
               {/* Search Input */}
-              <div className="relative mb-6">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <div className="relative mb-4 sm:mb-6">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                 <input
                   type="text"
                   placeholder="Enter Box ID (e.g., 7K92)..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2ECC71] focus:border-transparent transition-all"
+                  className="w-full pl-8 sm:pl-10 pr-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2ECC71] focus:border-transparent transition-all text-sm sm:text-base"
                 />
               </div>
 
               {/* Quick Search Suggestions */}
-              <div className="mb-4">
-                <div className="text-sm text-gray-600 mb-2">Quick Search:</div>
-                <div className="flex flex-wrap gap-2">
+              <div className="mb-3 sm:mb-4">
+                <div className="text-xs sm:text-sm text-gray-600 mb-2">Quick Search:</div>
+                <div className="flex flex-wrap gap-1 sm:gap-2">
                   {["7K92", "9M34", "5P78"].map((id) => (
                     <button
                       key={id}
                       onClick={() => setSearchTerm(id)}
-                      className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-sm transition-colors"
+                      className="px-2 sm:px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs sm:text-sm transition-colors"
                     >
                       #{id}
                     </button>
@@ -354,19 +354,19 @@ export default function BlockchainTransparency() {
               </div>
 
               {/* Search Results */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 {filteredBoxes.map((box) => (
                   <button
                     key={box.id}
                     onClick={() => setSelectedBox(box)}
-                    className={`w-full text-left p-4 rounded-lg border transition-all hover:shadow-md ${
+                    className={`w-full text-left p-3 sm:p-4 rounded-lg border transition-all hover:shadow-md ${
                       selectedBox.id === box.id
                         ? 'border-[#2ECC71] bg-green-50 shadow-md'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold text-gray-900">Box #{box.id}</span>
+                    <div className="flex justify-between items-center mb-1 sm:mb-2">
+                      <span className="font-semibold text-gray-900 text-sm sm:text-base">Box #{box.id}</span>
                       <span className={`text-xs px-2 py-1 rounded-full font-medium ${
                         box.status === 'Active' ? 'bg-green-100 text-green-700' :
                         box.status === 'In Transit' ? 'bg-blue-100 text-blue-700' :
@@ -375,7 +375,7 @@ export default function BlockchainTransparency() {
                         {box.status}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-600 flex justify-between">
+                    <div className="text-xs sm:text-sm text-gray-600 flex justify-between">
                       <span>Reuse #{box.reuses}</span>
                       <span className="text-[#2ECC71] font-medium">{box.co2Saved} CO₂ saved</span>
                     </div>
@@ -385,14 +385,14 @@ export default function BlockchainTransparency() {
 
               {/* Enhanced Box Details */}
               {selectedBox && (
-                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-4 border">
-                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-[#2ECC71]" />
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-3 sm:p-4 border">
+                  <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                    <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-[#2ECC71]" />
                     Box #{selectedBox.id} Blockchain Record
                   </h4>
                   
-                  <div className="space-y-3 text-sm">
-                    <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                       <div>
                         <span className="text-gray-600">Delivered:</span>
                         <div className="font-medium">{selectedBox.delivered}</div>
@@ -403,7 +403,7 @@ export default function BlockchainTransparency() {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                       <div>
                         <span className="text-gray-600">Reuse Count:</span>
                         <div className="font-medium text-[#2ECC71]">#{selectedBox.reuses}</div>
@@ -417,21 +417,21 @@ export default function BlockchainTransparency() {
                     <div>
                       <span className="text-gray-600">Current Location:</span>
                       <div className="font-medium flex items-center gap-1">
-                        <Globe className="w-3 h-3" />
+                        <Globe className="w-2 h-2 sm:w-3 sm:h-3" />
                         {selectedBox.currentLocation}
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-4 pt-3 border-t border-gray-200">
+                  <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-200">
                     <div className="text-xs text-gray-500 mb-1">Blockchain Hash:</div>
                     <div className="font-mono text-xs text-gray-700 break-all bg-white rounded p-2 border">
                       {selectedBox.hash}
                     </div>
                   </div>
                   
-                  <div className="mt-3 flex items-center gap-2 text-xs text-green-700">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="mt-2 sm:mt-3 flex items-center gap-2 text-xs text-green-700">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span>Verified on blockchain • Immutable record</span>
                   </div>
                 </div>
@@ -441,37 +441,37 @@ export default function BlockchainTransparency() {
         </div>
 
         {/* Enhanced Trust Indicators */}
-        <div className="mt-12 grid md:grid-cols-4 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-6 h-6 text-[#2ECC71]" />
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#2ECC71]" />
             </div>
-            <div className="font-semibold text-gray-900 mb-2">Immutable Records</div>
-            <div className="text-sm text-gray-600">Tamper-proof blockchain storage with cryptographic verification</div>
+            <div className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Immutable Records</div>
+            <div className="text-xs sm:text-sm text-gray-600">Tamper-proof blockchain storage with cryptographic verification</div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-6 h-6 text-blue-600" />
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
             </div>
-            <div className="font-semibold text-gray-900 mb-2">Real-time Updates</div>
-            <div className="text-sm text-gray-600">Instant verification with {networkStats.tps} transactions per second</div>
+            <div className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Real-time Updates</div>
+            <div className="text-xs sm:text-sm text-gray-600">Instant verification with {networkStats.tps} transactions per second</div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Globe className="w-6 h-6 text-purple-600" />
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
             </div>
-            <div className="font-semibold text-gray-900 mb-2">Global Network</div>
-            <div className="text-sm text-gray-600">Decentralized tracking across {networkStats.nodes} validator nodes</div>
+            <div className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Global Network</div>
+            <div className="text-xs sm:text-sm text-gray-600">Decentralized tracking across {networkStats.nodes} validator nodes</div>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Database className="w-6 h-6 text-yellow-600" />
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <Database className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
             </div>
-            <div className="font-semibold text-gray-900 mb-2">Complete Transparency</div>
-            <div className="text-sm text-gray-600">Full audit trail with {networkStats.blocks.toLocaleString()}+ verified blocks</div>
+            <div className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Complete Transparency</div>
+            <div className="text-xs sm:text-sm text-gray-600">Full audit trail with {networkStats.blocks.toLocaleString()}+ verified blocks</div>
           </div>
         </div>
       </Wrapper>

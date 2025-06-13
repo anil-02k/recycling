@@ -4,88 +4,88 @@ import Wrapper from "./wrapper";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0F2E1B] text-white py-16">
+    <footer className="bg-[#0F2E1B] text-white py-12 sm:py-16">
       <Wrapper>
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">🌱</span>
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg sm:text-xl">🌱</span>
               </div>
               <div>
-                <span className="font-unbounded font-bold text-xl">EcoLoop</span>
+                <span className="font-unbounded font-bold text-lg sm:text-xl">EcoLoop</span>
                 <div className="text-xs text-orange-500 font-semibold">Hackathon Edition</div>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">
+            <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
               Transforming packaging waste into rewards. Building a sustainable future, one delivery at a time.
             </p>
             
             {/* QR Code */}
-            <div className="bg-white p-4 rounded-lg w-fit">
-              <div className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
-                <span className="text-xs text-gray-500">Demo Video QR</span>
+            <div className="bg-white p-3 sm:p-4 rounded-lg w-fit">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded flex items-center justify-center">
+                <span className="text-xs text-gray-500 text-center">Demo Video QR</span>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-unbounded font-semibold text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><Link href="#how-it-works" className="text-gray-300 hover:text-[#2ECC71] transition-colors">How It Works</Link></li>
-              <li><Link href="#benefits" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Impact Calculator</Link></li>
-              <li><Link href="#retailer-solution" className="text-gray-300 hover:text-[#2ECC71] transition-colors">For Business</Link></li>
-              <li><Link href="#blockchain" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Blockchain</Link></li>
-              <li><Link href="#ar-experience" className="text-gray-300 hover:text-[#2ECC71] transition-colors">AR Experience</Link></li>
+            <h3 className="font-unbounded font-semibold text-base sm:text-lg mb-3 sm:mb-4">Quick Links</h3>
+            <ul className="space-y-1 sm:space-y-2">
+              <li><Link href="#how-it-works" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">How It Works</Link></li>
+              <li><Link href="#benefits" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">Impact Calculator</Link></li>
+              <li><Link href="#retailer-solution" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">For Business</Link></li>
+              <li><Link href="#blockchain" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">Blockchain</Link></li>
+              <li><Link href="#ar-experience" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">AR Experience</Link></li>
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h3 className="font-unbounded font-semibold text-lg mb-4">Support</h3>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-gray-300 hover:text-[#2ECC71] transition-colors">FAQ</Link></li>
-              <li><Link href="#" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Help Center</Link></li>
-              <li><Link href="#" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Contact Support</Link></li>
-              <li><Link href="#" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Partner Program</Link></li>
+            <h3 className="font-unbounded font-semibold text-base sm:text-lg mb-3 sm:mb-4">Support</h3>
+            <ul className="space-y-1 sm:space-y-2">
+              <li><Link href="#" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">FAQ</Link></li>
+              <li><Link href="#" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">Help Center</Link></li>
+              <li><Link href="#" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">Contact Support</Link></li>
+              <li><Link href="#" className="text-sm sm:text-base text-gray-300 hover:text-[#2ECC71] transition-colors">Partner Program</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-unbounded font-semibold text-lg mb-4">Contact</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#2ECC71]" />
-                <span className="text-gray-300">hello@ecoloop.com</span>
+            <h3 className="font-unbounded font-semibold text-base sm:text-lg mb-3 sm:mb-4">Contact</h3>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[#2ECC71]" />
+                <span className="text-sm sm:text-base text-gray-300">hello@ecoloop.com</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#2ECC71]" />
-                <span className="text-gray-300">+91 98765 43210</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#2ECC71]" />
+                <span className="text-sm sm:text-base text-gray-300">+91 98765 43210</span>
               </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#2ECC71]" />
-                <span className="text-gray-300">Mumbai, India</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#2ECC71]" />
+                <span className="text-sm sm:text-base text-gray-300">Mumbai, India</span>
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="mt-6">
-              <h4 className="font-semibold mb-3">Follow Us</h4>
-              <div className="flex gap-3">
-                <Link href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-lg">📘</span>
+            <div className="mt-4 sm:mt-6">
+              <h4 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Follow Us</h4>
+              <div className="flex gap-2 sm:gap-3">
+                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
+                  <span className="text-base sm:text-lg">📘</span>
                 </Link>
-                <Link href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-lg">📷</span>
+                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
+                  <span className="text-base sm:text-lg">📷</span>
                 </Link>
-                <Link href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-lg">🐦</span>
+                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
+                  <span className="text-base sm:text-lg">🐦</span>
                 </Link>
-                <Link href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
-                  <span className="text-lg">💼</span>
+                <Link href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#2ECC71] transition-colors">
+                  <span className="text-base sm:text-lg">💼</span>
                 </Link>
               </div>
             </div>
@@ -93,21 +93,21 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-gray-700 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
             © 2025 EcoLoop Hackathon Edition. Built for Hackathon 2025. All rights reserved.
           </p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Privacy Policy</Link>
-            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Terms of Service</Link>
-            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Cookie Policy</Link>
+          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-xs sm:text-sm transition-colors">Privacy Policy</Link>
+            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-xs sm:text-sm transition-colors">Terms of Service</Link>
+            <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-xs sm:text-sm transition-colors">Cookie Policy</Link>
           </div>
         </div>
 
         {/* Hackathon Credits */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 px-4 py-2 rounded-full text-sm">
-            <span className="text-lg">🏆</span>
+        <div className="mt-6 sm:mt-8 text-center">
+          <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm">
+            <span className="text-base sm:text-lg">🏆</span>
             <span className="font-semibold">Hackathon 2025 Submission</span>
           </div>
         </div>

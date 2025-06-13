@@ -154,23 +154,23 @@ export default function ARExperience() {
   };
 
   return (
-    <section id="ar-experience" className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+    <section id="ar-experience" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
       <Wrapper>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-4 sm:mb-6">
             AR Waste Impact Visualizer
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
             Experience your environmental impact in augmented reality. Scan with your phone or use our interactive desktop experience.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* QR Code & Mobile Experience */}
-          <div className="text-center">
-            <div className="bg-white rounded-2xl p-8 shadow-xl inline-block border border-gray-100">
+          <div className="text-center order-2 lg:order-1">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-xl inline-block border border-gray-100">
               {/* Dynamic QR Code */}
-              <div className="w-64 h-64 bg-white rounded-lg flex flex-col items-center justify-center mb-6 border-2 border-gray-100 relative overflow-hidden">
+              <div className="w-48 h-48 sm:w-64 sm:h-64 bg-white rounded-lg flex flex-col items-center justify-center mb-4 sm:mb-6 border-2 border-gray-100 relative overflow-hidden mx-auto">
                 {qrCodeData ? (
                   <img 
                     src={qrCodeData} 
@@ -179,8 +179,8 @@ export default function ARExperience() {
                   />
                 ) : (
                   <div className="animate-pulse">
-                    <QrCode className="w-16 h-16 text-gray-400 mb-4" />
-                    <div className="text-gray-600 font-semibold">Generating QR...</div>
+                    <QrCode className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mb-4" />
+                    <div className="text-gray-600 font-semibold text-sm sm:text-base">Generating QR...</div>
                   </div>
                 )}
                 
@@ -188,40 +188,40 @@ export default function ARExperience() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 animate-pulse"></div>
               </div>
               
-              <div className="flex items-center justify-center gap-2 text-[#2ECC71] font-semibold mb-4">
-                <Smartphone className="w-5 h-5" />
-                <span>Scan with your phone camera</span>
+              <div className="flex items-center justify-center gap-2 text-[#2ECC71] font-semibold mb-3 sm:mb-4">
+                <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">Scan with your phone camera</span>
               </div>
               
-              <div className="text-sm text-gray-500 max-w-xs mx-auto">
+              <div className="text-xs sm:text-sm text-gray-500 max-w-xs mx-auto">
                 Open your camera app and point at the QR code to launch the AR experience
               </div>
             </div>
 
             {/* Mobile AR Features */}
-            <div className="mt-8 space-y-4">
-              <h3 className="text-xl font-unbounded font-bold text-gray-900">
+            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+              <h3 className="text-lg sm:text-xl font-unbounded font-bold text-gray-900">
                 Mobile AR Features
               </h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="text-3xl mb-2">📱</div>
-                  <div className="font-semibold text-gray-900">3D Visualization</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-2xl sm:text-3xl mb-2">📱</div>
+                  <div className="font-semibold text-gray-900 text-sm sm:text-base">3D Visualization</div>
                   <div className="text-gray-600">See waste reduction in 3D space around you</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="text-3xl mb-2">🌍</div>
-                  <div className="font-semibold text-gray-900">Real-time Data</div>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-2xl sm:text-3xl mb-2">🌍</div>
+                  <div className="font-semibold text-gray-900 text-sm sm:text-base">Real-time Data</div>
                   <div className="text-gray-600">Live environmental impact metrics</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="text-3xl mb-2">📸</div>
-                  <div className="font-semibold text-gray-900">Share Impact</div>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-2xl sm:text-3xl mb-2">📸</div>
+                  <div className="font-semibold text-gray-900 text-sm sm:text-base">Share Impact</div>
                   <div className="text-gray-600">Capture & share your sustainability story</div>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="text-3xl mb-2">🎯</div>
-                  <div className="font-semibold text-gray-900">Goal Tracking</div>
+                <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md hover:shadow-lg transition-shadow">
+                  <div className="text-2xl sm:text-3xl mb-2">🎯</div>
+                  <div className="font-semibold text-gray-900 text-sm sm:text-base">Goal Tracking</div>
                   <div className="text-gray-600">Monitor progress and unlock achievements</div>
                 </div>
               </div>
@@ -229,17 +229,17 @@ export default function ARExperience() {
           </div>
 
           {/* Interactive Desktop Experience */}
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-unbounded font-bold text-gray-900">
+          <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-xl border border-gray-100 order-1 lg:order-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-unbounded font-bold text-gray-900">
                 Desktop AR Experience
               </h3>
               {isCameraActive && (
                 <button
                   onClick={stopCamera}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors"
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
                 >
-                  <Pause className="w-4 h-4" />
+                  <Pause className="w-3 h-3 sm:w-4 sm:h-4" />
                   Stop Camera
                 </button>
               )}
@@ -248,7 +248,7 @@ export default function ARExperience() {
             {!isARActive && !isScanning ? (
               <div className="text-center">
                 {/* Camera View or Placeholder */}
-                <div className="w-full h-80 bg-gradient-to-br from-[#2ECC71] via-[#A8E6CF] to-[#3B82F6] rounded-lg flex items-center justify-center mb-6 relative overflow-hidden">
+                <div className="w-full h-64 sm:h-80 bg-gradient-to-br from-[#2ECC71] via-[#A8E6CF] to-[#3B82F6] rounded-lg flex items-center justify-center mb-4 sm:mb-6 relative overflow-hidden">
                   {isCameraActive ? (
                     <video
                       ref={videoRef}
@@ -258,41 +258,41 @@ export default function ARExperience() {
                       muted
                     />
                   ) : (
-                    <div className="text-center text-white relative z-10">
-                      <div className="text-6xl mb-4">🌍</div>
-                      <h4 className="text-2xl font-bold mb-2">Your Environmental Impact</h4>
-                      <p className="text-lg opacity-90 mb-4">Experience AR visualization</p>
-                      <div className="flex gap-2 justify-center">
-                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="text-center text-white relative z-10 p-4">
+                      <div className="text-4xl sm:text-5xl lg:text-6xl mb-4">🌍</div>
+                      <h4 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">Your Environmental Impact</h4>
+                      <p className="text-sm sm:text-base lg:text-lg opacity-90 mb-4">Experience AR visualization</p>
+                      <div className="flex gap-1 sm:gap-2 justify-center">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/60 rounded-full animate-bounce"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                       </div>
                     </div>
                   )}
                   
                   {/* Floating AR Elements */}
-                  <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float">
-                    <span className="text-2xl">♻️</span>
+                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-3 animate-float">
+                    <span className="text-lg sm:text-2xl">♻️</span>
                   </div>
-                  <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float" style={{ animationDelay: '1s' }}>
-                    <span className="text-2xl">🌱</span>
+                  <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-3 animate-float" style={{ animationDelay: '1s' }}>
+                    <span className="text-lg sm:text-2xl">🌱</span>
                   </div>
-                  <div className="absolute top-1/2 right-8 bg-white/20 backdrop-blur-sm rounded-full p-3 animate-float" style={{ animationDelay: '2s' }}>
-                    <span className="text-2xl">💧</span>
+                  <div className="absolute top-1/2 right-4 sm:right-8 bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-3 animate-float" style={{ animationDelay: '2s' }}>
+                    <span className="text-lg sm:text-2xl">💧</span>
                   </div>
                   
                   {/* AR Scanning Overlay */}
                   {isCameraActive && (
                     <div className="absolute inset-0 border-4 border-[#2ECC71] rounded-lg">
-                      <div className="absolute top-4 left-4 w-8 h-8 border-l-4 border-t-4 border-[#2ECC71]"></div>
-                      <div className="absolute top-4 right-4 w-8 h-8 border-r-4 border-t-4 border-[#2ECC71]"></div>
-                      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-4 border-b-4 border-[#2ECC71]"></div>
-                      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-4 border-b-4 border-[#2ECC71]"></div>
+                      <div className="absolute top-2 sm:top-4 left-2 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 border-l-4 border-t-4 border-[#2ECC71]"></div>
+                      <div className="absolute top-2 sm:top-4 right-2 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-r-4 border-t-4 border-[#2ECC71]"></div>
+                      <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 border-l-4 border-b-4 border-[#2ECC71]"></div>
+                      <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-r-4 border-b-4 border-[#2ECC71]"></div>
                       
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-4 py-2 rounded-lg">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-3 sm:px-4 py-2 rounded-lg">
                         <div className="flex items-center gap-2">
-                          <Camera className="w-4 h-4" />
-                          <span className="text-sm font-semibold">Point camera at EcoLoop box</span>
+                          <Camera className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs sm:text-sm font-semibold">Point camera at EcoLoop box</span>
                         </div>
                       </div>
                     </div>
@@ -300,35 +300,35 @@ export default function ARExperience() {
                 </div>
                 
                 {/* Action Buttons */}
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <button
                     onClick={performARScan}
-                    className="flex items-center gap-2 bg-[#2ECC71] hover:bg-[#27AE60] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                    className="flex items-center gap-2 bg-[#2ECC71] hover:bg-[#27AE60] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-colors"
                   >
-                    <Camera className="w-5 h-5" />
+                    <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
                     {isCameraActive ? 'Scan for Impact' : 'Start AR Camera'}
                   </button>
                   
                   <button
                     onClick={simulateARScan}
-                    className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                    className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-colors"
                   >
-                    <Play className="w-5 h-5" />
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                     Demo Mode
                   </button>
                 </div>
               </div>
             ) : isScanning ? (
               <div className="text-center">
-                <div className="w-full h-80 bg-gradient-to-br from-blue-100 via-purple-100 to-green-100 rounded-lg flex items-center justify-center relative overflow-hidden">
-                  <div className="text-center relative z-10">
-                    <div className="w-20 h-20 border-4 border-[#2ECC71] border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Analyzing Your Impact...</h4>
-                    <p className="text-gray-600 mb-4">Processing environmental data</p>
+                <div className="w-full h-64 sm:h-80 bg-gradient-to-br from-blue-100 via-purple-100 to-green-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+                  <div className="text-center relative z-10 p-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[#2ECC71] border-t-transparent rounded-full animate-spin mx-auto mb-4 sm:mb-6"></div>
+                    <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Analyzing Your Impact...</h4>
+                    <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">Processing environmental data</p>
                     
                     {/* Scanning Progress */}
-                    <div className="w-64 bg-gray-200 rounded-full h-2 mx-auto">
-                      <div className="bg-[#2ECC71] h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                    <div className="w-48 sm:w-64 bg-gray-200 rounded-full h-1.5 sm:h-2 mx-auto">
+                      <div className="bg-[#2ECC71] h-1.5 sm:h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
                     </div>
                   </div>
                   
@@ -339,35 +339,35 @@ export default function ARExperience() {
                 </div>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Impact Results */}
-                <div className="w-full h-80 bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-lg p-6 relative overflow-hidden">
-                  <div className="grid grid-cols-2 gap-6 h-full">
+                <div className="w-full h-64 sm:h-80 bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-lg p-4 sm:p-6 relative overflow-hidden">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-6 h-full">
                     {/* Left Column */}
-                    <div className="space-y-4">
-                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
-                        <div className="text-4xl mb-2">📦</div>
-                        <div className="text-2xl font-bold text-[#2ECC71]">{wasteImpact.boxes}</div>
-                        <div className="text-sm text-gray-600">Boxes Returned</div>
+                    <div className="space-y-2 sm:space-y-4">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 text-center">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl mb-1 sm:mb-2">📦</div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-[#2ECC71]">{wasteImpact.boxes}</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Boxes Returned</div>
                       </div>
-                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
-                        <div className="text-4xl mb-2">🍶</div>
-                        <div className="text-2xl font-bold text-blue-600">{wasteImpact.bottles}</div>
-                        <div className="text-sm text-gray-600">Bottles Equivalent</div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 text-center">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl mb-1 sm:mb-2">🍶</div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600">{wasteImpact.bottles}</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Bottles Equivalent</div>
                       </div>
                     </div>
                     
                     {/* Right Column */}
-                    <div className="space-y-4">
-                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
-                        <div className="text-4xl mb-2">🌍</div>
-                        <div className="text-2xl font-bold text-purple-600">{wasteImpact.co2}kg</div>
-                        <div className="text-sm text-gray-600">CO₂ Prevented</div>
+                    <div className="space-y-2 sm:space-y-4">
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 text-center">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl mb-1 sm:mb-2">🌍</div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-purple-600">{wasteImpact.co2}kg</div>
+                        <div className="text-xs sm:text-sm text-gray-600">CO₂ Prevented</div>
                       </div>
-                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center">
-                        <div className="text-4xl mb-2">🌳</div>
-                        <div className="text-2xl font-bold text-green-600">{wasteImpact.trees}</div>
-                        <div className="text-sm text-gray-600">Trees Planted</div>
+                      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 text-center">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl mb-1 sm:mb-2">🌳</div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-green-600">{wasteImpact.trees}</div>
+                        <div className="text-xs sm:text-sm text-gray-600">Trees Planted</div>
                       </div>
                     </div>
                   </div>
@@ -377,7 +377,7 @@ export default function ARExperience() {
                     {Array.from({ length: 15 }).map((_, i) => (
                       <div
                         key={i}
-                        className="absolute w-3 h-3 bg-[#2ECC71] rounded-full animate-ping"
+                        className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-[#2ECC71] rounded-full animate-ping"
                         style={{
                           left: `${Math.random() * 100}%`,
                           top: `${Math.random() * 100}%`,
@@ -390,25 +390,25 @@ export default function ARExperience() {
                 </div>
                 
                 {/* Impact Summary */}
-                <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-[#2ECC71] rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold">🎉</span>
+                <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 sm:p-6 border border-green-200">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-[#2ECC71] rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold text-sm sm:text-base">🎉</span>
                     </div>
-                    <h4 className="text-lg font-bold text-gray-900">Outstanding Environmental Impact!</h4>
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900">Outstanding Environmental Impact!</h4>
                   </div>
-                  <p className="text-gray-700 mb-4">
+                  <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4">
                     Your {wasteImpact.boxes} returned EcoLoop boxes have prevented <strong>{wasteImpact.bottles} plastic bottles</strong> from reaching landfills and saved <strong>{wasteImpact.co2}kg of CO₂</strong> emissions!
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     <button
                       onClick={resetExperience}
-                      className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                      className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-colors text-sm sm:text-base"
                     >
-                      <RotateCcw className="w-4 h-4" />
+                      <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
                       Try Again
                     </button>
-                    <button className="bg-[#2ECC71] hover:bg-[#27AE60] text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                    <button className="bg-[#2ECC71] hover:bg-[#27AE60] text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-colors text-sm sm:text-base">
                       Share Results
                     </button>
                   </div>
@@ -422,53 +422,53 @@ export default function ARExperience() {
         </div>
 
         {/* Enhanced AR Features Grid */}
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="text-center group">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-2xl">🥽</span>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-xl sm:text-2xl">🥽</span>
             </div>
-            <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
+            <h3 className="text-lg sm:text-xl font-unbounded font-bold text-gray-900 mb-2">
               Immersive AR Visualization
             </h3>
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600">
               See your environmental impact come to life in 3D augmented reality with real-time data overlays
             </p>
           </div>
           
           <div className="text-center group">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-2xl">📊</span>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-xl sm:text-2xl">📊</span>
             </div>
-            <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
+            <h3 className="text-lg sm:text-xl font-unbounded font-bold text-gray-900 mb-2">
               Live Impact Metrics
             </h3>
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600">
               Real-time calculations showing bottles saved, CO₂ reduced, and environmental benefits
             </p>
           </div>
           
           <div className="text-center group">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-2xl">🎯</span>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-xl sm:text-2xl">🎯</span>
             </div>
-            <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-2">
+            <h3 className="text-lg sm:text-xl font-unbounded font-bold text-gray-900 mb-2">
               Gamified Sustainability
             </h3>
-            <p className="text-gray-600">
+            <p className="text-sm sm:text-base text-gray-600">
               Unlock achievements, track milestones, and share your sustainability journey with friends
             </p>
           </div>
         </div>
 
         {/* Technical Implementation Note */}
-        <div className="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-200">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">ℹ️</span>
+        <div className="mt-8 sm:mt-12 bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-200">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs sm:text-sm font-bold">ℹ️</span>
             </div>
-            <h4 className="text-lg font-bold text-gray-900">Technical Implementation</h4>
+            <h4 className="text-base sm:text-lg font-bold text-gray-900">Technical Implementation</h4>
           </div>
-          <p className="text-gray-600 text-sm">
+          <p className="text-xs sm:text-sm text-gray-600">
             This AR experience uses WebRTC for camera access, Canvas API for QR code generation, and WebGL for 3D visualizations. 
             In production, it would integrate with AR.js, Three.js, and blockchain APIs for real-time impact tracking.
           </p>

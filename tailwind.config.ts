@@ -67,7 +67,8 @@ const config: Config = {
         "unbounded": ["var(--font-unbounded)", "sans-serif"],
       },
       screens: {
-        xs: "424px",
+        xs: "375px",
+        xxs: "424px",
       },
     },
   },
