@@ -1,7 +1,7 @@
 "use client";
 
-import { Search } from "lucide-react";
-import { useState } from "react";
+import { Search, Zap, Shield, Globe, Database } from "lucide-react";
+import { useState, useEffect } from "react";
 import Wrapper from "./wrapper";
 
 const sampleBoxes = [
@@ -37,113 +37,292 @@ const sampleBoxes = [
   }
 ];
 
+// Network nodes representing different parts of the blockchain
+const networkNodes = [
+  { id: 1, x: 15, y: 20, type: "validator", label: "Validator 1", status: "active" },
+  { id: 2, x: 45, y: 15, type: "storage", label: "Storage Node", status: "active" },
+  { id: 3, x: 75, y: 25, type: "validator", label: "Validator 2", status: "active" },
+  { id: 4, x: 25, y: 50, type: "api", label: "API Gateway", status: "active" },
+  { id: 5, x: 55, y: 45, type: "consensus", label: "Consensus", status: "processing" },
+  { id: 6, x: 85, y: 55, type: "storage", label: "Backup Node", status: "active" },
+  { id: 7, x: 35, y: 75, type: "validator", label: "Validator 3", status: "active" },
+  { id: 8, x: 65, y: 80, type: "api", label: "Mobile API", status: "active" },
+];
+
+// Connections between nodes
+const connections = [
+  { from: 1, to: 2 }, { from: 2, to: 3 }, { from: 1, to: 4 },
+  { from: 4, to: 5 }, { from: 5, to: 6 }, { from: 3, to: 6 },
+  { from: 4, to: 7 }, { from: 7, to: 8 }, { from: 5, to: 8 },
+  { from: 2, to: 5 }, { from: 6, to: 8 }, { from: 1, to: 7 }
+];
+
 export default function BlockchainTransparency() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBox, setSelectedBox] = useState(sampleBoxes[0]);
+  const [activeConnections, setActiveConnections] = useState<number[]>([]);
+  const [networkStats, setNetworkStats] = useState({
+    tps: 23,
+    nodes: 8,
+    uptime: 99.9,
+    blocks: 1247
+  });
 
   const filteredBoxes = sampleBoxes.filter(box => 
     box.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Animate network activity
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Randomly activate connections to show data flow
+      const randomConnections = connections
+        .map((_, index) => index)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, Math.floor(Math.random() * 4) + 2);
+      
+      setActiveConnections(randomConnections);
+      
+      // Update network stats
+      setNetworkStats(prev => ({
+        tps: prev.tps + Math.floor(Math.random() * 10) - 5,
+        nodes: 8,
+        uptime: 99.9,
+        blocks: prev.blocks + Math.floor(Math.random() * 3)
+      }));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const getNodeColor = (type: string, status: string) => {
+    if (status === "processing") return "#F59E0B"; // Yellow
+    
+    switch (type) {
+      case "validator": return "#2ECC71"; // Green
+      case "storage": return "#3B82F6"; // Blue
+      case "api": return "#8B5CF6"; // Purple
+      case "consensus": return "#EF4444"; // Red
+      default: return "#6B7280"; // Gray
+    }
+  };
+
+  const getNodeIcon = (type: string) => {
+    switch (type) {
+      case "validator": return "✓";
+      case "storage": return "💾";
+      case "api": return "🔗";
+      case "consensus": return "⚡";
+      default: return "●";
+    }
+  };
 
   return (
     <section id="blockchain" className="py-20 bg-gray-50">
       <Wrapper>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-unbounded font-bold text-gray-900 mb-6">
-            Blockchain Transparency
+            Blockchain Transparency Network
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Every box is tracked on an immutable blockchain. Verify the complete lifecycle of any EcoLoop package in real-time.
+            Every box is tracked on our decentralized blockchain network. Real-time verification with complete transparency and immutable records.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-7 gap-8">
-          {/* Blockchain Visualization - 70% */}
+          {/* Enhanced Blockchain Visualization - 70% */}
           <div className="lg:col-span-5">
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-unbounded font-bold text-gray-900 mb-6">
-                Live Blockchain Network
-              </h3>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-unbounded font-bold text-gray-900">
+                  Live Network Topology
+                </h3>
+                <div className="flex gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-[#2ECC71] rounded-full animate-pulse"></div>
+                    <span className="text-gray-600">Active: {networkStats.nodes} nodes</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-yellow-500" />
+                    <span className="text-gray-600">{networkStats.tps} TPS</span>
+                  </div>
+                </div>
+              </div>
               
-              {/* Animated Blockchain Visualization */}
-              <div className="relative h-80 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 overflow-hidden">
-                {/* Blockchain Nodes */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="grid grid-cols-4 gap-8">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className={`w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-1000 ${
-                          i % 3 === 0 ? 'bg-[#2ECC71] animate-pulse' : 
-                          i % 3 === 1 ? 'bg-blue-500' : 'bg-purple-500'
-                        }`}
-                        style={{ animationDelay: `${i * 0.2}s` }}
-                      >
-                        {i + 1}
-                      </div>
-                    ))}
+              {/* Advanced Network Visualization */}
+              <div className="relative h-96 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 rounded-lg overflow-hidden">
+                {/* Background Grid */}
+                <div className="absolute inset-0 opacity-20">
+                  <svg className="w-full h-full">
+                    <defs>
+                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" strokeWidth="1"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                  </svg>
+                </div>
+
+                {/* Network Connections */}
+                <svg className="absolute inset-0 w-full h-full">
+                  <defs>
+                    <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#2ECC71" stopOpacity="0.8" />
+                      <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.8" />
+                    </linearGradient>
+                    <linearGradient id="activeConnection" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#F59E0B" stopOpacity="1" />
+                      <stop offset="50%" stopColor="#EF4444" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#F59E0B" stopOpacity="1" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {connections.map((connection, index) => {
+                    const fromNode = networkNodes.find(n => n.id === connection.from);
+                    const toNode = networkNodes.find(n => n.id === connection.to);
+                    const isActive = activeConnections.includes(index);
+                    
+                    if (!fromNode || !toNode) return null;
+                    
+                    return (
+                      <g key={index}>
+                        <line
+                          x1={`${fromNode.x}%`}
+                          y1={`${fromNode.y}%`}
+                          x2={`${toNode.x}%`}
+                          y2={`${toNode.y}%`}
+                          stroke={isActive ? "url(#activeConnection)" : "url(#connectionGradient)"}
+                          strokeWidth={isActive ? "3" : "2"}
+                          className={isActive ? "animate-pulse" : ""}
+                        />
+                        
+                        {/* Data Flow Animation */}
+                        {isActive && (
+                          <circle
+                            r="4"
+                            fill="#F59E0B"
+                            className="animate-pulse"
+                          >
+                            <animateMotion
+                              dur="2s"
+                              repeatCount="indefinite"
+                              path={`M ${fromNode.x * 4} ${fromNode.y * 3.84} L ${toNode.x * 4} ${toNode.y * 3.84}`}
+                            />
+                          </circle>
+                        )}
+                      </g>
+                    );
+                  })}
+                </svg>
+
+                {/* Network Nodes */}
+                {networkNodes.map((node) => (
+                  <div
+                    key={node.id}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                    style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                  >
+                    {/* Node Circle */}
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg transition-all duration-300 group-hover:scale-110 ${
+                        node.status === "processing" ? "animate-pulse" : ""
+                      }`}
+                      style={{ backgroundColor: getNodeColor(node.type, node.status) }}
+                    >
+                      {getNodeIcon(node.type)}
+                    </div>
+                    
+                    {/* Node Label */}
+                    <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      {node.label}
+                    </div>
+                    
+                    {/* Status Indicator */}
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-ping"></div>
+                  </div>
+                ))}
+
+                {/* Network Stats Overlay */}
+                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-3">
+                  <div className="text-xs space-y-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span>Network Status: Online</span>
+                    </div>
+                    <div>Blocks: {networkStats.blocks.toLocaleString()}</div>
+                    <div>Uptime: {networkStats.uptime}%</div>
                   </div>
                 </div>
 
-                {/* Connecting Lines */}
-                <svg className="absolute inset-0 w-full h-full">
-                  <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#2ECC71" />
-                      <stop offset="100%" stopColor="#3498DB" />
-                    </linearGradient>
-                  </defs>
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <line
-                      key={i}
-                      x1={`${20 + (i * 15)}%`}
-                      y1="30%"
-                      x2={`${35 + (i * 15)}%`}
-                      y2="70%"
-                      stroke="url(#lineGradient)"
-                      strokeWidth="2"
-                      className="animate-pulse"
-                      style={{ animationDelay: `${i * 0.3}s` }}
-                    />
-                  ))}
-                </svg>
-
-                {/* Floating Transaction Indicators */}
-                <div className="absolute top-4 right-4 bg-[#2ECC71] text-white px-3 py-1 rounded-full text-sm font-semibold animate-bounce">
-                  Live: 23 TPS
-                </div>
-                
-                <div className="absolute bottom-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  Network: 99.9% Uptime
+                {/* Transaction Flow Indicator */}
+                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white rounded-lg p-3">
+                  <div className="text-xs text-center">
+                    <div className="text-lg font-bold text-green-400">{networkStats.tps}</div>
+                    <div>Transactions/sec</div>
+                  </div>
                 </div>
               </div>
 
-              {/* Transaction Details */}
+              {/* Network Legend */}
+              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-[#2ECC71] rounded-full"></div>
+                  <span className="text-gray-600">Validators</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-[#3B82F6] rounded-full"></div>
+                  <span className="text-gray-600">Storage Nodes</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-[#8B5CF6] rounded-full"></div>
+                  <span className="text-gray-600">API Gateways</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-[#EF4444] rounded-full"></div>
+                  <span className="text-gray-600">Consensus</span>
+                </div>
+              </div>
+
+              {/* Recent Transactions */}
               <div className="mt-6 bg-gray-50 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-900 mb-3">Latest Transactions</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Database className="w-4 h-4" />
+                  Latest Blockchain Transactions
+                </h4>
                 <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600">Box #7K92 → Returned</span>
-                    <span className="text-[#2ECC71] font-mono">0x1a2b...7890</span>
+                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                    <span className="text-gray-600">Box #7K92 → Return Confirmed</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#2ECC71] font-mono text-xs">0x1a2b...7890</span>
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600">Box #9M34 → In Transit</span>
-                    <span className="text-blue-500 font-mono">0x9876...cdef</span>
+                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                    <span className="text-gray-600">Box #9M34 → Location Update</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-blue-500 font-mono text-xs">0x9876...cdef</span>
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-gray-600">Box #5P78 → Delivered</span>
-                    <span className="text-purple-500 font-mono">0xabcd...4321</span>
+                  <div className="flex justify-between items-center text-sm bg-white rounded p-2">
+                    <span className="text-gray-600">Box #5P78 → Reuse Cycle #4</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-500 font-mono text-xs">0xabcd...4321</span>
+                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Search Database - 30% */}
+          {/* Enhanced Search Database - 30% */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-4">
-                Track a Box
+              <h3 className="text-xl font-unbounded font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Search className="w-5 h-5" />
+                Track Any Box
               </h3>
               
               {/* Search Input */}
@@ -151,28 +330,44 @@ export default function BlockchainTransparency() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  placeholder="Enter Box ID..."
+                  placeholder="Enter Box ID (e.g., 7K92)..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2ECC71] focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2ECC71] focus:border-transparent transition-all"
                 />
               </div>
 
+              {/* Quick Search Suggestions */}
+              <div className="mb-4">
+                <div className="text-sm text-gray-600 mb-2">Quick Search:</div>
+                <div className="flex flex-wrap gap-2">
+                  {["7K92", "9M34", "5P78"].map((id) => (
+                    <button
+                      key={id}
+                      onClick={() => setSearchTerm(id)}
+                      className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-sm transition-colors"
+                    >
+                      #{id}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Search Results */}
-              <div className="space-y-3">
+              <div className="space-y-3 mb-6">
                 {filteredBoxes.map((box) => (
                   <button
                     key={box.id}
                     onClick={() => setSelectedBox(box)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all ${
+                    className={`w-full text-left p-4 rounded-lg border transition-all hover:shadow-md ${
                       selectedBox.id === box.id
-                        ? 'border-[#2ECC71] bg-green-50'
+                        ? 'border-[#2ECC71] bg-green-50 shadow-md'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between items-center mb-2">
                       <span className="font-semibold text-gray-900">Box #{box.id}</span>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
                         box.status === 'Active' ? 'bg-green-100 text-green-700' :
                         box.status === 'In Transit' ? 'bg-blue-100 text-blue-700' :
                         'bg-gray-100 text-gray-700'
@@ -180,45 +375,64 @@ export default function BlockchainTransparency() {
                         {box.status}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      Reuse #{box.reuses} • {box.co2Saved} CO₂ saved
+                    <div className="text-sm text-gray-600 flex justify-between">
+                      <span>Reuse #{box.reuses}</span>
+                      <span className="text-[#2ECC71] font-medium">{box.co2Saved} CO₂ saved</span>
                     </div>
                   </button>
                 ))}
               </div>
 
-              {/* Selected Box Details */}
+              {/* Enhanced Box Details */}
               {selectedBox && (
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-3">Box #{selectedBox.id} Details</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Delivered:</span>
-                      <span className="font-medium">{selectedBox.delivered}</span>
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-4 border">
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-[#2ECC71]" />
+                    Box #{selectedBox.id} Blockchain Record
+                  </h4>
+                  
+                  <div className="space-y-3 text-sm">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="text-gray-600">Delivered:</span>
+                        <div className="font-medium">{selectedBox.delivered}</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Returned:</span>
+                        <div className="font-medium">{selectedBox.returned}</div>
+                      </div>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Returned:</span>
-                      <span className="font-medium">{selectedBox.returned}</span>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="text-gray-600">Reuse Count:</span>
+                        <div className="font-medium text-[#2ECC71]">#{selectedBox.reuses}</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">CO₂ Impact:</span>
+                        <div className="font-medium text-[#2ECC71]">{selectedBox.co2Saved}</div>
+                      </div>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Current Use:</span>
-                      <span className="font-medium">#{selectedBox.reuses}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Location:</span>
-                      <span className="font-medium">{selectedBox.currentLocation}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">CO₂ Saved:</span>
-                      <span className="font-medium text-[#2ECC71]">{selectedBox.co2Saved}</span>
+                    
+                    <div>
+                      <span className="text-gray-600">Current Location:</span>
+                      <div className="font-medium flex items-center gap-1">
+                        <Globe className="w-3 h-3" />
+                        {selectedBox.currentLocation}
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="mt-3 pt-3 border-t border-gray-200">
-                    <div className="text-xs text-gray-500">Blockchain Hash:</div>
-                    <div className="font-mono text-xs text-gray-700 break-all">
+                  <div className="mt-4 pt-3 border-t border-gray-200">
+                    <div className="text-xs text-gray-500 mb-1">Blockchain Hash:</div>
+                    <div className="font-mono text-xs text-gray-700 break-all bg-white rounded p-2 border">
                       {selectedBox.hash}
                     </div>
+                  </div>
+                  
+                  <div className="mt-3 flex items-center gap-2 text-xs text-green-700">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span>Verified on blockchain • Immutable record</span>
                   </div>
                 </div>
               )}
@@ -226,27 +440,38 @@ export default function BlockchainTransparency() {
           </div>
         </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-12 grid md:grid-cols-4 gap-6 text-center">
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <div className="text-3xl mb-2">🔒</div>
-            <div className="font-semibold text-gray-900">Immutable Records</div>
-            <div className="text-sm text-gray-600">Tamper-proof tracking</div>
+        {/* Enhanced Trust Indicators */}
+        <div className="mt-12 grid md:grid-cols-4 gap-6">
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-6 h-6 text-[#2ECC71]" />
+            </div>
+            <div className="font-semibold text-gray-900 mb-2">Immutable Records</div>
+            <div className="text-sm text-gray-600">Tamper-proof blockchain storage with cryptographic verification</div>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <div className="text-3xl mb-2">⚡</div>
-            <div className="font-semibold text-gray-900">Real-time Updates</div>
-            <div className="text-sm text-gray-600">Instant verification</div>
+          
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Zap className="w-6 h-6 text-blue-600" />
+            </div>
+            <div className="font-semibold text-gray-900 mb-2">Real-time Updates</div>
+            <div className="text-sm text-gray-600">Instant verification with {networkStats.tps} transactions per second</div>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <div className="text-3xl mb-2">🌐</div>
-            <div className="font-semibold text-gray-900">Global Network</div>
-            <div className="text-sm text-gray-600">Decentralized tracking</div>
+          
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Globe className="w-6 h-6 text-purple-600" />
+            </div>
+            <div className="font-semibold text-gray-900 mb-2">Global Network</div>
+            <div className="text-sm text-gray-600">Decentralized tracking across {networkStats.nodes} validator nodes</div>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <div className="text-3xl mb-2">📊</div>
-            <div className="font-semibold text-gray-900">Full Transparency</div>
-            <div className="text-sm text-gray-600">Complete audit trail</div>
+          
+          <div className="bg-white rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Database className="w-6 h-6 text-yellow-600" />
+            </div>
+            <div className="font-semibold text-gray-900 mb-2">Complete Transparency</div>
+            <div className="text-sm text-gray-600">Full audit trail with {networkStats.blocks.toLocaleString()}+ verified blocks</div>
           </div>
         </div>
       </Wrapper>
