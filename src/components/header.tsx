@@ -29,10 +29,6 @@ export default function Header() {
               <div className="w-10 h-10 bg-[#2ECC71] rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-xl">🌱</span>
               </div>
-              {/* Hackathon Badge */}
-              <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse">
-                HACK
-              </div>
             </div>
             <div>
               <span className="font-unbounded font-bold text-xl text-gray-900">EcoLoop</span>
