@@ -98,34 +98,97 @@ export default function BenefitsDashboard() {
 
             {/* Visual Impact */}
             <div className="mt-12 text-center">
-              <div className="flex justify-center items-end gap-4 mb-6">
-                {/* Animated Tree Growth */}
-                <div className="relative">
-                  <div 
-                    className="bg-[#2ECC71] rounded-t-full transition-all duration-1000 ease-out"
-                    style={{ 
-                      width: '60px', 
-                      height: `${Math.min(returns * 8, 120)}px`,
-                      transformOrigin: 'bottom'
-                    }}
-                  ></div>
-                  <div className="w-4 h-8 bg-amber-600 mx-auto"></div>
-                  <div className="text-sm text-gray-600 mt-2">Trees Planted</div>
+              <div className="flex justify-center items-end gap-8 mb-6">
+                {/* Realistic Animated Tree */}
+                <div className="relative flex flex-col items-center">
+                  <div className="text-sm text-gray-600 mb-2">Trees Planted</div>
+                  
+                  {/* Tree Structure */}
+                  <div className="relative">
+                    {/* Tree Crown/Leaves */}
+                    <div 
+                      className="relative transition-all duration-1000 ease-out"
+                      style={{ 
+                        width: `${Math.min(returns * 4 + 40, 80)}px`,
+                        height: `${Math.min(returns * 6 + 60, 100)}px`,
+                        transformOrigin: 'bottom center'
+                      }}
+                    >
+                      {/* Main foliage - layered circles for realistic tree shape */}
+                      <div 
+                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-[#2ECC71] rounded-full transition-all duration-1000"
+                        style={{
+                          width: `${Math.min(returns * 4 + 40, 80)}px`,
+                          height: `${Math.min(returns * 4 + 40, 80)}px`,
+                        }}
+                      />
+                      
+                      {/* Secondary foliage layers for depth */}
+                      <div 
+                        className="absolute bottom-2 left-1/4 transform -translate-x-1/2 bg-[#27AE60] rounded-full transition-all duration-1000"
+                        style={{
+                          width: `${Math.min(returns * 3 + 25, 50)}px`,
+                          height: `${Math.min(returns * 3 + 25, 50)}px`,
+                        }}
+                      />
+                      
+                      <div 
+                        className="absolute bottom-2 right-1/4 transform translate-x-1/2 bg-[#27AE60] rounded-full transition-all duration-1000"
+                        style={{
+                          width: `${Math.min(returns * 3 + 20, 45)}px`,
+                          height: `${Math.min(returns * 3 + 20, 45)}px`,
+                        }}
+                      />
+                      
+                      {/* Top layer for tree crown */}
+                      <div 
+                        className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-[#2ECC71] rounded-full transition-all duration-1000"
+                        style={{
+                          width: `${Math.min(returns * 2 + 30, 60)}px`,
+                          height: `${Math.min(returns * 2 + 30, 60)}px`,
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Tree Trunk */}
+                    <div 
+                      className="bg-amber-700 mx-auto transition-all duration-1000"
+                      style={{
+                        width: `${Math.min(returns * 1.5 + 8, 16)}px`,
+                        height: `${Math.min(returns * 2 + 20, 35)}px`,
+                      }}
+                    />
+                    
+                    {/* Tree Roots/Base */}
+                    <div className="w-8 h-2 bg-amber-800 mx-auto rounded-b-full" />
+                  </div>
+                  
+                  {/* Growth indicator */}
+                  <div className="mt-2 text-xs text-gray-500">
+                    Growth: {Math.min(returns * 10, 100)}%
+                  </div>
                 </div>
 
                 {/* Animated Coin Stack */}
-                <div className="relative">
-                  {Array.from({ length: Math.min(Math.floor(returns / 2), 8) }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-12 h-3 bg-yellow-400 rounded-full border-2 border-yellow-500 transition-all duration-500"
-                      style={{ 
-                        marginTop: i === 0 ? '0' : '-2px',
-                        animationDelay: `${i * 0.1}s`
-                      }}
-                    ></div>
-                  ))}
-                  <div className="text-sm text-gray-600 mt-2">Rewards Earned</div>
+                <div className="relative flex flex-col items-center">
+                  <div className="text-sm text-gray-600 mb-2">Rewards Earned</div>
+                  
+                  <div className="relative">
+                    {Array.from({ length: Math.min(Math.floor(returns / 2), 8) }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-12 h-3 bg-yellow-400 rounded-full border-2 border-yellow-500 transition-all duration-500"
+                        style={{ 
+                          marginTop: i === 0 ? '0' : '-2px',
+                          animationDelay: `${i * 0.1}s`
+                        }}
+                      />
+                    ))}
+                  </div>
+                  
+                  <div className="mt-2 text-xs text-gray-500">
+                    ₹{moneyEarned} earned
+                  </div>
                 </div>
               </div>
               
