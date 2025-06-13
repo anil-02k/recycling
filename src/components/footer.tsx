@@ -13,7 +13,10 @@ export default function Footer() {
               <div className="w-10 h-10 bg-[#2ECC71] rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-xl">🌱</span>
               </div>
-              <span className="font-unbounded font-bold text-xl">EcoLoop</span>
+              <div>
+                <span className="font-unbounded font-bold text-xl">EcoLoop</span>
+                <div className="text-xs text-orange-500 font-semibold">Hackathon Edition</div>
+              </div>
             </div>
             <p className="text-gray-300 mb-6">
               Transforming packaging waste into rewards. Building a sustainable future, one delivery at a time.
@@ -34,7 +37,8 @@ export default function Footer() {
               <li><Link href="#how-it-works" className="text-gray-300 hover:text-[#2ECC71] transition-colors">How It Works</Link></li>
               <li><Link href="#benefits" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Impact Calculator</Link></li>
               <li><Link href="#retailer-solution" className="text-gray-300 hover:text-[#2ECC71] transition-colors">For Business</Link></li>
-              <li><Link href="#cta" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Join Early Access</Link></li>
+              <li><Link href="#blockchain" className="text-gray-300 hover:text-[#2ECC71] transition-colors">Blockchain</Link></li>
+              <li><Link href="#ar-experience" className="text-gray-300 hover:text-[#2ECC71] transition-colors">AR Experience</Link></li>
             </ul>
           </div>
 
@@ -91,12 +95,20 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 EcoLoop. All rights reserved. Building a sustainable future.
+            © 2025 EcoLoop Hackathon Edition. Built for Sparkathon 2025. All rights reserved.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Privacy Policy</Link>
             <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Terms of Service</Link>
             <Link href="#" className="text-gray-400 hover:text-[#2ECC71] text-sm transition-colors">Cookie Policy</Link>
+          </div>
+        </div>
+
+        {/* Hackathon Credits */}
+        <div className="mt-8 text-center">
+          <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-300 px-4 py-2 rounded-full text-sm">
+            <span className="text-lg">🏆</span>
+            <span className="font-semibold">Sparkathon 2025 Submission</span>
           </div>
         </div>
       </Wrapper>
